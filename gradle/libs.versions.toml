@@ -3,7 +3,7 @@ kotlin = "1.7.21"
 
 minecraft = "1.19.2"
 qfapi = "4.0.0-beta.21+0.67.0-1.19.2"
-qkl = "0.1.4+kt.1.7.20+flk.1.8.5-SNAPSHOT"
+qkl = "1.0.0+kt.1.7.20+flk.1.8.5"
 loader = "0.17.6"
 mappings = "1.19.2+build.21"
 loom = "1.+"
