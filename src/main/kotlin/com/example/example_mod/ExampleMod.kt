@@ -10,6 +10,6 @@ class ExampleMod : ModInitializer {
         LOGGER.info("Hello Quilt world from {}!", mod.metadata()?.name())
     }
     companion object {
-        val LOGGER: Logger = LoggerFactory.getLogger("Example Mod")
+        private val LOGGER: Logger = LoggerFactory.getLogger("Example Mod")
     }
 }
