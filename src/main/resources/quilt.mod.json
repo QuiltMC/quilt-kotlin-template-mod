@@ -19,7 +19,10 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "init": "com.example.example_mod.ExampleMod"
+      "init": {
+				"adapter": "kotlin",
+				"value": "com.example.example_mod.ExampleMod"
+			}
     },
     "depends": [
       {
