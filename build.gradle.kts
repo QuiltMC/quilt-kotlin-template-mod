@@ -12,9 +12,6 @@ plugins {
 }
 
 val archives_base_name: String by project
-
-group = "com.example"
-version = project.version.toString()
 base.archivesName.set(archives_base_name)
 
 val javaVersion = 17
@@ -62,19 +59,19 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = javaVersion.toString()
-            languageVersion = libs.plugins.kotlin.get().version.strictVersion
-            incremental = true
+            // languageVersion: A.B of the kotlin plugin version A.B.C
+            languageVersion = libs.plugins.kotlin.get().version.requiredVersion.substringBeforeLast('.')
         }
     }
 
-    withType<JavaCompile> {
+    withType<JavaCompile>.configureEach {
         options.encoding = "UTF-8"
         options.isDeprecation = true
-        options.isIncremental = true
         options.release.set(javaVersion)
     }
 
     processResources {
+        filteringCharset = "UTF-8"
         inputs.property("version", project.version)
 
         filesMatching("quilt.mod.json") {
@@ -86,24 +83,30 @@ tasks {
         }
     }
 
-    // Change the gradle version here and run `./gradlew wrapper` or `gradle wrapper` to update gradle scripts
+    javadoc {
+        options.encoding = "UTF-8"
+    }
+
+    // Run `./gradlew wrapper --gradle-version <newVersion>` or `gradle wrapper --gradle-version <newVersion>` to update gradle scripts
     // BIN distribution should be sufficient for the majority of mods
     wrapper {
-        gradleVersion = "7.6"
         distributionType = Wrapper.DistributionType.BIN
     }
 
-    remapJar {
-        dependsOn(remapSourcesJar)
-    }
-
     jar {
-        from("LICENSE")
+        from("LICENSE") {
+            rename { "LICENSE_${archives_base_name}" }
+        }
     }
 }
 
-kotlin {
-    jvmToolchain(javaVersion)
+val targetJavaVersion = JavaVersion.toVersion(javaVersion)
+if (JavaVersion.current() < targetJavaVersion) {
+    kotlin.jvmToolchain(javaVersion)
+
+    java.toolchain {
+        languageVersion.set(JavaLanguageVersion.of(javaVersion))
+    }
 }
 
 java {
@@ -116,39 +119,23 @@ java {
     // withJavadocJar()
 
     // Still required by IDEs such as Eclipse and VSC
-    sourceCompatibility = JavaVersion.toVersion(javaVersion)
-    targetCompatibility = JavaVersion.toVersion(javaVersion)
+    sourceCompatibility = targetJavaVersion
+    targetCompatibility = targetJavaVersion
 }
-
-
-val sourceJar = task("sourceJar", Jar::class) {
-    dependsOn(tasks["classes"])
-    archiveClassifier.set("source")
-    from(sourceSets.main.get().allSource)
-}
-
-val javadoc = task("javadocJar", Jar::class) {
-    archiveClassifier.set("javadoc")
-    from(tasks.javadoc)
-    from(tasks.javadoc)
-}
-
 
 // Configure the maven publication
 publishing {
     publications {
-        create<MavenPublication>("Maven") {
+        register<MavenPublication>("Maven") {
             from(components.getByName("java"))
-            artifact(javadoc)
-            artifact(sourceJar)
         }
+    }
 
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-        repositories {
-            // Add repositories to publish to here.
-            // Notice: This block does NOT have the same function as the block in the top level.
-            // The repositories here will be used for publishing your artifact, not for
-            // retrieving dependencies.
-        }
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+        // Notice: This block does NOT have the same function as the block in the top level.
+        // The repositories here will be used for publishing your artifact, not for
+        // retrieving dependencies.
     }
 }
