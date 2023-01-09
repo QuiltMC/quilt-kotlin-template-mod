@@ -7,13 +7,13 @@ insert_final_newline = true
 tab_width = 4
 trim_trailing_whitespace = true
 
-[*.gradle]
+[*.gradle.kts]
 indent_style = tab
 
 [*.java]
 indent_style = tab
 
-[*.kotlin]
+[*.kt]
 indent_size = tab
 
 [*.json]

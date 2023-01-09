@@ -1,47 +1,47 @@
 {
-  "schema_version": 1,
-  "quilt_loader": {
-    "group": "com.example",
-    "id": "example_mod",
-    "version": "${version}",
-    "metadata": {
-      "name": "Mod Name",
-      "description": "A short description of your mod.",
-      "contributors": {
-        "Your name here": "Owner"
-      },
-      "contact": {
-        "homepage": "https://example.com/",
-        "issues": "https://github.com/QuiltMC/quilt-kotlin-template-mod/issues",
-        "sources": "https://github.com/QuiltMC/quilt-kotlin-template-mod"
-      },
-      "icon": "assets/example_mod/icon.png"
-    },
-    "intermediate_mappings": "net.fabricmc:intermediary",
-    "entrypoints": {
-      "init": {
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "com.example",
+		"id": "example_mod",
+		"version": "${version}",
+		"metadata": {
+			"name": "Mod Name",
+			"description": "A short description of your mod.",
+			"contributors": {
+				"Your name here": "Owner"
+			},
+			"contact": {
+				"homepage": "https://example.com/",
+				"issues": "https://github.com/QuiltMC/quilt-kotlin-template-mod/issues",
+				"sources": "https://github.com/QuiltMC/quilt-kotlin-template-mod"
+			},
+			"icon": "assets/example_mod/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": {
 				"adapter": "kotlin",
 				"value": "com.example.example_mod.ExampleMod"
 			}
-    },
-    "depends": [
-      {
-        "id": "quilt_loader",
-        "versions": ">=0.17.0-"
-      },
-      {
-        "id": "quilted_fabric_api",
-        "versions": ">=4.0.0-"
-      },
-      {
-        "id": "qkl",
-        "versions": ">=0.1.4-"
-      },
-      {
-        "id": "minecraft",
-        "versions": ">=1.19.2"
-      }
-    ]
-  },
-  "mixin": "example_mod.mixins.json"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.17.0-"
+			},
+			{
+				"id": "quilted_fabric_api",
+				"versions": ">=4.0.0-"
+			},
+			{
+				"id": "qkl",
+				"versions": ">=0.1.4-"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.19.2"
+			}
+		]
+	},
+	"mixin": "example_mod.mixins.json"
 }
