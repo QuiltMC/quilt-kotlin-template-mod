@@ -52,7 +52,7 @@ dependencies {
 	modImplementation(libs.quilted.fabric.api)
 	// modImplementation(libs.bundles.quilted.fabric.api.deprecated) // If you wish to use the deprecated Fabric API modules
 
-	modImplementation(libs.qkl)
+	modImplementation(libs.quilted.kotlin.api)
 }
 
 tasks {
