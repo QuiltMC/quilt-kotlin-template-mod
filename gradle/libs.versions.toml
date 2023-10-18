@@ -22,7 +22,8 @@ quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loade
 quilt_mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt_mappings" }
 
 [bundles]
-quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+quilted_fabric_api = ["quilted_fabric_api"]
+quilted_fabric_api_deprecated = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
