@@ -49,10 +49,10 @@ dependencies {
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
-	modImplementation(libs.qfapi)
-	// modImplementation(libs.bundles.qfapi) // If you wish to use the deprecated Fabric API modules
+	modImplementation(libs.quilted.fabric.api)
+	// modImplementation(libs.bundles.quilted.fabric.api.deprecated) // If you wish to use the deprecated Fabric API modules
 
-	modImplementation(libs.qkl)
+	modImplementation(libs.quilted.kotlin.api)
 }
 
 tasks {
